@@ -3,4 +3,5 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "azure_communication_email"
 
+require "mail"
 require "minitest/autorun"
