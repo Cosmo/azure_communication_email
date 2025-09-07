@@ -26,8 +26,8 @@ To send emails using Azure Communication Services, configure Action Mailer with 
 Rails.application.configure do
   config.action_mailer.delivery_method = :azure_communication_email
   config.action_mailer.azure_communication_email_settings = {
-    endpoint: ENV.fetch("ACS_EMAIL_ENDPOINT"),
-    api_key:  ENV.fetch("ACS_EMAIL_KEY")
+    endpoint:   ENV.fetch("ACS_EMAIL_ENDPOINT"),
+    access_key: ENV.fetch("ACS_EMAIL_ACCESS_KEY"),
   }
 end
 ```
