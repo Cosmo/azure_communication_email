@@ -26,9 +26,20 @@ To send emails using Azure Communication Services, configure Action Mailer with 
 Rails.application.configure do
   config.action_mailer.delivery_method = :azure_communication_email
   config.action_mailer.azure_communication_email_settings = {
-    endpoint:   ENV.fetch("ACS_EMAIL_ENDPOINT"),
+    endpoint:   ENV.fetch("ACS_EMAIL_ENDPOINT"), # e.g., "https://<RESOURCE_NAME>.communication.azure.com"
     access_key: ENV.fetch("ACS_EMAIL_ACCESS_KEY"),
   }
+end
+```
+
+Then, you can use Action Mailer as usual:
+
+```ruby
+class UserMailer < ApplicationMailer
+  def welcome_email(user)
+    @user = user
+    mail(to: @user.email, from: "donotreply@<yourdomain>.com", subject: "Hello World!")
+  end
 end
 ```
 
