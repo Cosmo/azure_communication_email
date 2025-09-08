@@ -22,6 +22,11 @@ module AzureCommunicationEmail
         }
       }
 
+      # Does only work with custom domains
+      if (name = first_sender_display_name).present?
+        hash["senderDisplayName"] = name
+      end
+
       if (html = html_body).present?
         hash["content"]["html"] = html
       end
@@ -56,21 +61,38 @@ module AzureCommunicationEmail
     private
 
     def plain_text_body
-      if @mail.text_part
-        @mail.text_part.decoded.to_s
-      elsif @mail.mime_type == "text/plain"
-        @mail.body.decoded.to_s
-      else
-        ""
-      end
+      return extract_text_part if @mail.text_part
+      return extract_plain_body if @mail.mime_type.to_s.start_with?("text/plain")
+      return extract_bare_body   if @mail.mime_type.to_s.blank?
+
+      "" # HTML-only message
     end
 
     def html_body
-      if @mail.html_part
-        @mail.html_part.decoded.to_s
-      elsif @mail.mime_type == "text/html"
-        @mail.body.decoded.to_s
-      end
+      return extract_html_part if @mail.html_part
+      return extract_html_body if @mail.mime_type.to_s.start_with?("text/html")
+
+      nil
+    end
+
+    def extract_text_part
+      @mail.text_part.body.decoded.to_s
+    end
+
+    def extract_plain_body
+      @mail.body.decoded.to_s
+    end
+
+    def extract_bare_body
+      @mail.body&.decoded.to_s
+    end
+
+    def extract_html_part
+      @mail.html_part.body.decoded.to_s
+    end
+
+    def extract_html_body
+      @mail.body.decoded.to_s
     end
 
     def address_list(field_sym)
@@ -81,6 +103,10 @@ module AzureCommunicationEmail
 
     def first_sender_address
       address_list(:from).first&.address.to_s
+    end
+
+    def first_sender_display_name
+      address_list(:from).first&.display_name.to_s.strip
     end
 
     def recipient_objects(field_sym)

@@ -10,7 +10,7 @@ require "uri"
 
 module AzureCommunicationEmail
   class DeliveryMethod
-    DEFAULTS = { api_version: "2023-03-31" }
+    DEFAULTS = { api_version: "2025-01-15-preview" }
 
     attr_accessor :endpoint, :api_version, :access_key
 

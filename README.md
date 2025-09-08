@@ -43,6 +43,11 @@ class UserMailer < ApplicationMailer
 end
 ```
 
+## Links
+
+- [Service limits for Azure Communication Services](https://learn.microsoft.com/en-us/azure/communication-services/concepts/service-limits#email)
+- [How to add and remove Multiple Sender Addresses to Email Communication Service](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/email/add-multiple-senders?pivots=platform-azp)
+
 ## Contributing
 
 Bug reports and pull requests are welcome.
