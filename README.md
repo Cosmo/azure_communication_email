@@ -1,6 +1,6 @@
 # Azure Communication Email
 
-Azure Communication Email is an Action Mailer delivery method for Ruby on Rails using the Azure Communication Email API.
+Azure Communication Email is an Action Mailer delivery method for Ruby on Rails using the [Azure Email Communications Service](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/email/create-email-communication-resource?pivots=platform-azp).
 
 ## Installation
 
