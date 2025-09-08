@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = [ "Devran Cosmo Uenal" ]
   spec.email = [ "maccosmo@gmail.com" ]
 
-  spec.summary = "Azure Communication Services Email Delivery Method for Action Mailer"
-  spec.description = "Action Mailer delivery method using the Azure Communication Services Email API."
+  spec.summary = "Azure Email Communications Service Delivery Method for Action Mailer"
+  spec.description = "Action Mailer delivery method using the Azure Email Communications Service."
   spec.homepage = "https://github.com/Cosmo/azure_communication_email"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
