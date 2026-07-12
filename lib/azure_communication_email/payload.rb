@@ -122,11 +122,13 @@ module AzureCommunicationEmail
       return [] unless @mail.attachments&.any?
 
       @mail.attachments.map do |attachment|
-        {
+        object = {
           "name" => attachment.filename.to_s,
           "contentType" => attachment.mime_type.to_s,
           "contentInBase64" => Base64.strict_encode64(attachment.body.decoded)
         }
+        object["contentId"] = attachment.cid if attachment.inline?
+        object
       end
     end
 

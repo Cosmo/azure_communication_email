@@ -53,6 +53,8 @@ module AzureCommunicationEmail
       end
 
       response
+    rescue Error
+      raise
     rescue StandardError => e
       raise Error, "Error sending email: #{e.message}"
     end

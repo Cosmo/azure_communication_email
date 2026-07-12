@@ -83,4 +83,18 @@ class TestPayload < Minitest::Test
     assert_equal "text/plain", att["contentType"]
     refute_nil att["contentInBase64"]
   end
+
+  def test_inline_attachment_content_id
+    mail = Mail.new do
+      from "a@x.com"
+      to "b@x.com"
+      subject "Inline image"
+      html_part { body "<img src=\"cid:logo\">" }
+    end
+    mail.attachments.inline["logo.png"] = "image"
+
+    attachment = AzureCommunicationEmail::Payload.new(mail).as_json["attachments"].first
+
+    assert_equal mail.attachments.first.cid, attachment["contentId"]
+  end
 end

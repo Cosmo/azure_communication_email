@@ -5,3 +5,4 @@ require "azure_communication_email"
 
 require "mail"
 require "minitest/autorun"
+require "minitest/mock"
